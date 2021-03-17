@@ -1,36 +1,24 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Main {
-    public static void main(String[] args) {
-        BufferedReader br = null;
+    public static void main(String[] args) throws IOException{
+        String fileName = "123.txt";
+        String search = "public";
+        String replace = "private";
+        Charset charset = StandardCharsets.UTF_8;
+        Path path = Paths.get(fileName);
         try {
-            br = new BufferedReader(new FileReader("123.txt"));
-            String tmp = "";
-            while ((tmp = br.readLine()) != null) {// пробел использовать как разделитель
-                String[] s = tmp.split("\\s");
-                int k=0;
-                for (int i=0;i<s.length-1;i++){
-                    if ((s[i+1].charAt(0)) == (s[i].charAt(s[i].length() - 1))){ //сравнение последнего символа текущего
-                        System.out.println(s[i]+" "+s[i+1]);                 // и последнего символа следуюзего слов
-                        k++;
-                    }
-                }
-                if (k==0) {
-                    System.out.println("Совпадений нет"); //если таких слов нет - вывод сообщения
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            Files.write(path, new String(Files.readAllBytes(path), charset).replace(search, replace).getBytes(charset));
+            System.out.println("Замена произведена");
+        } catch (NoSuchFileException e){
+            System.out.println("Файл не найден");
+
         }
 
     }

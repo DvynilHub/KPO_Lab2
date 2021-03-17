@@ -1,1 +1,4 @@
-abc cde easd asdt tras
+private static void
+private int a=123
+private String str
+private int
