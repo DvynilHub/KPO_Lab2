@@ -10,7 +10,7 @@ public class Main {
         FileWriter fw;
         String pattern = "bd\\s[a-d]";
 
-        //Создание экземпляра класса Pattern
+        //Создание экземпляра класса Patternn
         Pattern r = Pattern.compile(pattern);
 
         try {
