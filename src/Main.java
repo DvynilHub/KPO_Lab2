@@ -6,17 +6,23 @@ public class Main {
     public static void main(String[] args) {
         File f = new File("input.txt");//Файл для чтения
         File f1 = new File("output.txt");//Файл для записи
-        BufferedReader bf;
-        FileWriter fw;
+
         String pattern = "bd\\s[a-d]";
 
         //Создание экземпляра класса Patternn
-        Pattern r = Pattern.compile(pattern);
 
+        search(f,f1,pattern);
+
+
+    }
+    public static void search(File f1,File f2, String pattern){
         try {
-            bf = new BufferedReader(new FileReader(f));
-            fw = new FileWriter(f1);
+            BufferedReader bf;
+            FileWriter fw;
+            bf = new BufferedReader(new FileReader(f1));
+            fw = new FileWriter(f2);
             String tmp;
+            Pattern r = Pattern.compile(pattern);
             //Пока в файле есть ненулевые строки выполняем поиск по шаблону
             while ((tmp = bf.readLine()) != null) {
                 //Создание экземпляра класса Matcher
