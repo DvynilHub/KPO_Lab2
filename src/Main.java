@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -6,10 +7,18 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        double[][] matrix = matr();
+        double[][] matrix = matr("123.txt");
         trans(matrix);
+        double[][] mat = {{1,5,9,4}
+                ,{2,6,1,5}
+                ,{3,7,2,6}
+                ,{4,8,3,7}};
+
+        if (mat == matrix){
+            System.out.println("+");
+        } else System.out.println("-");
     }
-    private static void trans(double[][] a){  //метод транспонирования и вывода матрицы
+    public static void trans(double[][] a){  //метод транспонирования и вывода матрицы
         try {
             for (int i = 0; i < a.length; i++) {
                 for (int j = i + 1; j < a.length; j++) {
@@ -33,12 +42,17 @@ public class Main {
         }
 
     }
-    private static double[][] matr() throws IOException { //функция считывания матрицы из файла
-        BufferedReader br = new BufferedReader(new FileReader("123.txt"));
+    public static double[][] matr(String fileName) throws IOException { //функция считывания матрицы из файла
+        BufferedReader br = new BufferedReader(new FileReader(fileName));
+        boolean err = false;
         try {
             List<String> lines = new ArrayList<>();
             while (br.ready()) {
                 lines.add(br.readLine());
+
+            }
+            if (lines.isEmpty()){
+                return null;
             }
             int matrixWidth = lines.get(0).split(" ").length;
             int matrixHeight = lines.size();
@@ -63,6 +77,9 @@ public class Main {
 
             }
             return matrix;
+        } catch (FileNotFoundException e){
+            System.out.println("Файл не найден");
+            return null;
         } catch (IOException e){
             e.printStackTrace();
             return null;
