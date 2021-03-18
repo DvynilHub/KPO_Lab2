@@ -1,4 +1,0 @@
-private static void
-private int a=123
-private String str
-private int

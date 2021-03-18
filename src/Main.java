@@ -13,6 +13,10 @@ public class Main {
         String replace = "private";
         Charset charset = StandardCharsets.UTF_8;
         Path path = Paths.get(fileName);
+        replase(fileName,search,replace,charset,path);
+
+    }
+    public static void replase(String fileName, String search, String replace, Charset charset, Path path) throws IOException{
         try {
             Files.write(path, new String(Files.readAllBytes(path), charset).replace(search, replace).getBytes(charset));
             System.out.println("Замена произведена");
@@ -20,7 +24,6 @@ public class Main {
             System.out.println("Файл не найден");
 
         }
-
     }
 
 
